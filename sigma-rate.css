@@ -1,0 +1,1733 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #6c42f5;
+    --primary-dark: #5a35d4;
+    --secondary: #00e5ff;
+    --accent: #ff2d75;
+    --background: #0a0b1d;
+    --card-bg: rgba(16, 18, 37, 0.8);
+    --text: #ffffff;
+    --text-secondary: #a0a8c3;
+    --positive: #00ff9d;
+    --negative: #ff2d75;
+    --border: rgba(108, 66, 245, 0.3);
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Crypto Background */
+.crypto-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+#matrixCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+}
+
+.floating-coins {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.coin {
+    position: absolute;
+    font-size: 24px;
+    color: rgba(108, 66, 245, 0.4);
+    animation: float 15s infinite linear;
+}
+
+.coin-1 {
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+}
+
+.coin-2 {
+    top: 20%;
+    right: 10%;
+    animation-delay: 3s;
+}
+
+.coin-3 {
+    bottom: 15%;
+    left: 15%;
+    animation-delay: 6s;
+}
+
+.coin-4 {
+    bottom: 25%;
+    right: 5%;
+    animation-delay: 9s;
+}
+
+.coin-5 {
+    top: 50%;
+    left: 50%;
+    animation-delay: 12s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-20px) rotate(90deg);
+    }
+    50% {
+        transform: translateY(0) rotate(180deg);
+    }
+    75% {
+        transform: translateY(20px) rotate(270deg);
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+    }
+}
+
+.crypto-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(108, 66, 245, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108, 66, 245, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.2;
+}
+
+/* New Crypto Animation */
+.crypto-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.blockchain-node {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--secondary);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--secondary);
+    animation: pulseNode 3s infinite;
+}
+
+.blockchain-connection {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    animation: flowConnection 4s infinite linear;
+}
+
+@keyframes pulseNode {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+}
+
+@keyframes flowConnection {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Main Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border);
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.ticker {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    color: var(--secondary);
+    font-weight: 700;
+}
+
+.blockchain-tag {
+    background: rgba(108, 66, 245, 0.2);
+    border: 1px solid var(--primary);
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.contract-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contract-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.address-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(16, 18, 37, 0.8);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.contract-address {
+    font-family: 'Rajdhani', monospace;
+    font-size: 0.85rem;
+    color: var(--text);
+    font-weight: 500;
+}
+
+.copy-btn {
+    background: rgba(108, 66, 245, 0.3);
+    border: 1px solid var(--primary);
+    border-radius: 6px;
+    padding: 6px;
+    color: var(--secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-btn:hover {
+    background: var(--primary);
+    transform: scale(1.05);
+}
+
+.copy-btn.copied {
+    background: var(--positive);
+    border-color: var(--positive);
+    color: var(--background);
+}
+
+/* Price Card - UPDATED (No price change boxes) */
+.price-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.price-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.price-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.price-header h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.update-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--secondary);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.price-content {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+.current-price {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--text);
+    text-shadow: 0 0 10px rgba(108, 66, 245, 0.5);
+    letter-spacing: 1px;
+}
+
+.inr-price {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--secondary);
+    background: rgba(0, 229, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+}
+
+/* REMOVED PRICE CHANGE STYLES */
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 25px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(108, 66, 245, 0.2);
+    border-radius: 12px;
+}
+
+.stat-info {
+    flex: 1;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.stat-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.5px;
+}
+
+/* Footer - UPDATED (No countdown) */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.api-info {
+    text-align: right;
+}
+
+/* Income Section Styles */
+.income-section {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.income-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.income-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.income-header {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.income-header h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.income-description {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.income-table-container {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+.income-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(16, 18, 37, 0.6);
+}
+
+.income-table th {
+    background: rgba(108, 66, 245, 0.2);
+    color: var(--secondary);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    padding: 15px 12px;
+    text-align: center;
+    border-bottom: 2px solid var(--primary);
+    font-size: 0.9rem;
+}
+
+.income-table td {
+    padding: 12px 10px;
+    text-align: center;
+    border-bottom: 1px solid rgba(108, 66, 245, 0.2);
+    color: var(--text);
+    font-weight: 500;
+}
+
+.income-table tbody tr:hover {
+    background: rgba(108, 66, 245, 0.1);
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+}
+
+.income-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Value highlighting */
+.value-usd {
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+.value-inr {
+    color: var(--positive);
+    font-weight: 600;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .price-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .current-price {
+        font-size: 2.5rem;
+    }
+    
+    .inr-price {
+        font-size: 1.5rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .address-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .copy-btn {
+        align-self: flex-end;
+    }
+    
+    .income-card {
+        padding: 20px 15px;
+    }
+    
+    .income-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .income-description {
+        font-size: 1rem;
+    }
+    
+    .income-table th,
+    .income-table td {
+        padding: 10px 6px;
+        font-size: 0.8rem;
+    }
+    
+    .income-table-container {
+        margin: 0 -15px;
+        width: calc(100% + 30px);
+    }
+}
+
+/* Loading Animation */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 11, 29, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+}
+
+/* Price animation */
+@keyframes priceUpdate {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.price-updated {
+    animation: priceUpdate 0.5s ease;
+}
+/* Add these new styles to your existing sigma-rate.css */
+
+/* Price Section Layout */
+.price-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.price-left {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.price-right {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Crypto Animation Card */
+.crypto-animation-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.crypto-animation-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.animation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.animation-header h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.network-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--positive);
+    animation: statusPulse 2s infinite;
+}
+
+@keyframes statusPulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.2);
+    }
+}
+
+/* Animation Container */
+.animation-container {
+    position: relative;
+    height: 300px;
+    background: rgba(10, 11, 29, 0.5);
+    border-radius: 15px;
+    border: 1px solid rgba(108, 66, 245, 0.3);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+/* 3D Crypto Orb */
+.crypto-orb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+}
+
+.orb-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    border-radius: 50%;
+    box-shadow: 0 0 30px var(--primary);
+    animation: orbRotate 8s infinite linear;
+}
+
+.orb-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid;
+    border-radius: 50%;
+    animation: orbRotate 6s infinite linear reverse;
+}
+
+.orb-ring-1 {
+    width: 60px;
+    height: 60px;
+    border-color: rgba(108, 66, 245, 0.6);
+    animation-duration: 4s;
+}
+
+.orb-ring-2 {
+    width: 80px;
+    height: 80px;
+    border-color: rgba(0, 229, 255, 0.4);
+    animation-duration: 6s;
+}
+
+.orb-ring-3 {
+    width: 100px;
+    height: 100px;
+    border-color: rgba(255, 45, 117, 0.3);
+    animation-duration: 8s;
+}
+
+.orb-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--secondary);
+    border-radius: 50%;
+    animation: particleFloat 4s infinite linear;
+}
+
+.orb-particle:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+.orb-particle:nth-child(2) { top: 20%; right: 20%; animation-delay: 0.5s; }
+.orb-particle:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 1s; }
+.orb-particle:nth-child(4) { bottom: 20%; right: 20%; animation-delay: 1.5s; }
+.orb-particle:nth-child(5) { top: 50%; left: 10%; animation-delay: 2s; }
+.orb-particle:nth-child(6) { top: 50%; right: 10%; animation-delay: 2.5s; }
+
+@keyframes orbRotate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes particleFloat {
+    0%, 100% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    25% {
+        transform: translate(10px, -10px);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translate(0, -20px);
+        opacity: 0.4;
+    }
+    75% {
+        transform: translate(-10px, -10px);
+        opacity: 0.7;
+    }
+}
+
+/* Blockchain Nodes */
+.blockchain-node {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background: rgba(108, 66, 245, 0.2);
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    color: var(--secondary);
+    font-size: 0.9rem;
+    animation: nodePulse 3s infinite;
+}
+
+.node-1 { top: 20%; left: 15%; animation-delay: 0s; }
+.node-2 { top: 15%; right: 20%; animation-delay: 0.3s; }
+.node-3 { top: 60%; left: 10%; animation-delay: 0.6s; }
+.node-4 { top: 70%; right: 15%; animation-delay: 0.9s; }
+.node-5 { bottom: 20%; left: 25%; animation-delay: 1.2s; }
+.node-6 { bottom: 15%; right: 30%; animation-delay: 1.5s; }
+
+@keyframes nodePulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(108, 66, 245, 0.5);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(108, 66, 245, 0.8);
+    }
+}
+
+/* Connection Lines */
+.connection-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+    transform-origin: left center;
+    animation: lineFlow 3s infinite linear;
+}
+
+.line-1 { top: 27%; left: 22%; width: 100px; transform: rotate(30deg); animation-delay: 0s; }
+.line-2 { top: 22%; left: 40%; width: 80px; transform: rotate(-20deg); animation-delay: 0.5s; }
+.line-3 { top: 65%; left: 17%; width: 120px; transform: rotate(15deg); animation-delay: 1s; }
+.line-4 { top: 75%; left: 45%; width: 90px; transform: rotate(-25deg); animation-delay: 1.5s; }
+.line-5 { bottom: 25%; left: 32%; width: 110px; transform: rotate(10deg); animation-delay: 2s; }
+.line-6 { bottom: 20%; left: 55%; width: 70px; transform: rotate(-15deg); animation-delay: 2.5s; }
+
+@keyframes lineFlow {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Data Packets */
+.data-packet {
+    position: absolute;
+    padding: 4px 8px;
+    background: rgba(0, 229, 255, 0.2);
+    border: 1px solid var(--secondary);
+    border-radius: 12px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    color: var(--secondary);
+    animation: packetMove 6s infinite linear;
+}
+
+.packet-1 { animation-delay: 0s; animation-duration: 8s; }
+.packet-2 { animation-delay: 2s; animation-duration: 10s; }
+.packet-3 { animation-delay: 4s; animation-duration: 12s; }
+
+@keyframes packetMove {
+    0% {
+        transform: translate(0, 0) scale(0.8);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(200px, -100px) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* Animation Stats */
+.animation-stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.animation-stat {
+    text-align: center;
+    flex: 1;
+}
+
+.animation-stat .stat-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+
+.animation-stat .stat-value {
+    display: block;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .price-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .animation-container {
+        height: 250px;
+    }
+    
+    .crypto-orb {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    .animation-container {
+        height: 200px;
+    }
+    
+    .crypto-orb {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .blockchain-node {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+    
+    .animation-stats {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+/* Award & Reward Special Styles */
+.award-card {
+    position: relative;
+    background: linear-gradient(135deg, var(--card-bg) 0%, rgba(108, 66, 245, 0.1) 100%);
+    border: 2px solid var(--primary);
+    padding-top: 50px; /* Extra space for badge */
+}
+
+.award-badge {
+    position: absolute;
+    top: 15px; /* Changed from -10px to 15px */
+    right: 20px;
+    background: linear-gradient(45deg, var(--accent), var(--secondary));
+    color: var(--background);
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(255, 45, 117, 0.4);
+    animation: badgeGlow 2s infinite alternate;
+    z-index: 2; /* Ensure it stays on top */
+}
+
+@keyframes badgeGlow {
+    0% {
+        box-shadow: 0 4px 15px rgba(255, 45, 117, 0.4);
+    }
+    100% {
+        box-shadow: 0 4px 25px rgba(255, 45, 117, 0.8);
+    }
+}
+
+.award-card .income-header {
+    margin-top: 0; /* Remove extra margin since we have padding */
+    margin-bottom: 25px;
+}
+
+/* Alternative solution if above doesn't work perfectly */
+.award-header-wrapper {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.award-header-wrapper .award-badge {
+    top: -10px;
+    right: 0;
+}
+/* Royalty Program Styles */
+.royalty-card {
+    background: linear-gradient(135deg, var(--card-bg) 0%, rgba(0, 229, 255, 0.1) 100%);
+    border: 2px solid var(--secondary);
+}
+
+.pool-system {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.pool-card {
+    background: rgba(16, 18, 37, 0.6);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid;
+    text-align: center;
+}
+
+.pool-1 {
+    border-color: var(--primary);
+}
+
+.pool-2 {
+    border-color: var(--secondary);
+}
+
+.pool-card h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: var(--text);
+}
+
+.pool-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.conditions-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.condition-card {
+    background: rgba(16, 18, 37, 0.6);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--border);
+}
+
+.condition-card h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: var(--text);
+}
+
+.condition-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.condition-card li {
+    padding: 5px 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Responsive Design for Royalty Program */
+@media (max-width: 768px) {
+    .pool-system {
+        grid-template-columns: 1fr;
+    }
+    
+    .conditions-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .royalty-card .income-table th,
+    .royalty-card .income-table td {
+        padding: 8px 4px;
+        font-size: 0.75rem;
+    }
+}
+/* Monthly Bonanza Styles */
+.bonanza-card {
+    background: linear-gradient(135deg, var(--card-bg) 0%, rgba(0, 255, 157, 0.1) 100%);
+    border: 2px solid var(--positive);
+    padding-top: 50px;
+}
+
+.monthly-badge {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: linear-gradient(45deg, var(--positive), var(--secondary));
+    color: var(--background);
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 255, 157, 0.4);
+    animation: monthlyPulse 2s infinite alternate;
+    z-index: 2;
+}
+
+@keyframes monthlyPulse {
+    0% {
+        box-shadow: 0 4px 15px rgba(0, 255, 157, 0.4);
+        transform: scale(1);
+    }
+    100% {
+        box-shadow: 0 4px 25px rgba(0, 255, 157, 0.8);
+        transform: scale(1.05);
+    }
+}
+
+.bonanza-card .income-header {
+    margin-top: 0;
+}
+
+/* Responsive Design for Monthly Bonanza */
+@media (max-width: 1024px) {
+    .bonanza-card .income-table th,
+    .bonanza-card .income-table td {
+        padding: 8px 4px;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .bonanza-card .income-table-container {
+        margin: 0 -10px;
+        width: calc(100% + 20px);
+    }
+}
+/* Associate Program Styles */
+/* Associate Program Premium Styles */
+.associate-card {
+    border-left: 4px solid #8e44ad;
+    background: linear-gradient(135deg, rgba(142, 68, 173, 0.05), rgba(155, 89, 182, 0.02));
+    position: relative;
+    overflow: hidden;
+}
+
+.associate-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(142, 68, 173, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.associate-badge {
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 0.8em;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
+}
+
+/* Journey Steps */
+.associate-journey {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0;
+    position: relative;
+}
+
+.associate-journey::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 10%;
+    right: 10%;
+    height: 3px;
+    background: linear-gradient(90deg, #8e44ad, #9b59b6, #8e44ad);
+    z-index: 1;
+}
+
+.journey-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+}
+
+.step-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    margin-bottom: 15px;
+    box-shadow: 0 8px 25px rgba(142, 68, 173, 0.4);
+    border: 3px solid white;
+}
+
+.step-content h4 {
+    color: #8e44ad;
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+.step-content p {
+    color: #a0a8c3;
+    font-size: 0.85em;
+    margin-bottom: 10px;
+}
+
+.step-badge {
+    background: rgba(142, 68, 173, 0.2);
+    color: #8e44ad;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.75em;
+    font-weight: 600;
+    border: 1px solid #8e44ad;
+}
+
+/* Program Rules Grid */
+.program-rules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.rule-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e8eaf0;
+    transition: all 0.3s ease;
+}
+
+.rule-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(142, 68, 173, 0.15);
+}
+
+.rule-icon {
+    font-size: 2em;
+    flex-shrink: 0;
+}
+
+.rule-content h4 {
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+.rule-content p {
+    color: #7f8c8d;
+    font-size: 0.85em;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.rule-tag {
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+}
+
+/* Different rule card colors */
+.rule-card-premium {
+    border-left: 4px solid #8e44ad;
+}
+
+.rule-card-link {
+    border-left: 4px solid #3498db;
+}
+
+.rule-card-earning {
+    border-left: 4px solid #27ae60;
+}
+
+.rule-card-lock {
+    border-left: 4px solid #f39c12;
+}
+
+.rule-card-warning {
+    border-left: 4px solid #e74c3c;
+}
+
+.rule-card-reset {
+    border-left: 4px solid #9b59b6;
+}
+
+/* Table Header */
+.table-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.table-header h3 {
+    color: #8e44ad;
+    margin-bottom: 8px;
+}
+
+.table-header p {
+    color: #a0a8c3;
+}
+
+/* CTA Section */
+.associate-cta {
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.associate-cta::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.cta-content h3 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.cta-content p {
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+.cta-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.85em;
+    opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .associate-journey {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .associate-journey::before {
+        display: none;
+    }
+    
+    .program-rules {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-stats {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .rule-card {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+/* Systematic Crypto Buy Styles */
+.scb-card {
+    border-left: 4px solid #27ae60;
+    background: linear-gradient(135deg, rgba(39, 174, 96, 0.05), rgba(46, 204, 113, 0.02));
+    position: relative;
+    overflow: hidden;
+}
+
+.scb-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(39, 174, 96, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.scb-badge {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 0.8em;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+/* SCB Overview */
+.scb-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.scb-plan-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e8eaf0;
+    transition: all 0.3s ease;
+}
+
+.scb-plan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(39, 174, 96, 0.15);
+}
+
+.plan-icon {
+    font-size: 2.5em;
+    flex-shrink: 0;
+}
+
+.plan-content h4 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.plan-content p {
+    color: #7f8c8d;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.plan-amount {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* Accumulation Grid */
+.accumulation-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.accumulation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(39, 174, 96, 0.1);
+    border-radius: 10px;
+    border-left: 3px solid #27ae60;
+}
+
+.duration {
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+.sigma-amount {
+    color: #27ae60;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+/* SCB Projection */
+.scb-projection {
+    margin: 40px 0;
+}
+
+.projection-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.projection-header h3 {
+    color: #27ae60;
+    margin-bottom: 8px;
+}
+
+.projection-header p {
+    color: #a0a8c3;
+}
+
+.projection-table-container {
+    overflow-x: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* SCB Benefits */
+.scb-benefits {
+    margin: 40px 0;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.benefit-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e8eaf0;
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.15);
+}
+
+.benefit-icon {
+    font-size: 2em;
+    flex-shrink: 0;
+}
+
+.benefit-content h4 {
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+.benefit-content p {
+    color: #7f8c8d;
+    font-size: 0.85em;
+    line-height: 1.4;
+}
+
+/* Monthly Breakdown */
+.monthly-breakdown {
+    margin-top: 40px;
+}
+
+.monthly-breakdown h4 {
+    color: #27ae60;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.2em;
+}
+
+.breakdown-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.breakdown-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e8eaf0;
+    transition: all 0.3s ease;
+}
+
+.breakdown-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.15);
+}
+
+.breakdown-title {
+    color: #7f8c8d;
+    font-size: 0.9em;
+    margin-bottom: 8px;
+}
+
+.breakdown-value {
+    color: #27ae60;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.breakdown-desc {
+    color: #a0a8c3;
+    font-size: 0.8em;
+}
+
+/* Growth Multiple Badge */
+.growth-badge {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 0.8em;
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .scb-overview {
+        grid-template-columns: 1fr;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .breakdown-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .scb-plan-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .benefit-card {
+        flex-direction: column;
+        text-align: center;
+    }
+}
