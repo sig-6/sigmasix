@@ -21,12 +21,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const directReferralTable = document.getElementById('direct-referral-table');
     const teamReferralTable = document.getElementById('team-referral-table');
     const awardRewardTable = document.getElementById('award-reward-table');
-    const royaltyProgramTable = document.getElementById('royalty-program-table');
     const monthlyBonanzaTable = document.getElementById('monthly-bonanza-table');
-    const associateProgramTable = document.getElementById('associate-program-table');
     const scbProjectionTable = document.getElementById('scb-projection-table');
     
-    // Income Plans Configuration - ALL 8 PLANS
+    // SCB Monthly INR Element
+    const scbMonthlyINRElement = document.getElementById('scb-monthly-inr');
+    
+    // Income Plans Configuration
     const incomePlans = {
         icoBonus: [
             { hold: 100, get: 10 },
@@ -59,15 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
             { teamHold: 4500000, getSigma: 4500, levelSigma: 450, levels: 10 },
             { teamHold: 5500000, getSigma: 5000, levelSigma: 500, levels: 10 }
         ],
-        royaltyProgram: [
-            { holding: 100, contribution: 1, pool1: 0.5, pool2: 0.5 },
-            { holding: 500, contribution: 5, pool1: 2.5, pool2: 2.5 },
-            { holding: 1000, contribution: 10, pool1: 5, pool2: 5 },
-            { holding: 5000, contribution: 50, pool1: 25, pool2: 25 },
-            { holding: 10000, contribution: 100, pool1: 50, pool2: 50 },
-            { holding: 50000, contribution: 500, pool1: 250, pool2: 250 },
-            { holding: 100000, contribution: 1000, pool1: 500, pool2: 500 }
-        ],
         monthlyBonanza: [
             { selfHold: 500, directHold: 500, teamHold: 500, getSigma: 150 },
             { selfHold: 1000, directHold: 1000, teamHold: 1000, getSigma: 300 },
@@ -76,14 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
             { selfHold: 10000, directHold: 10000, teamHold: 10000, getSigma: 3000 },
             { selfHold: 25000, directHold: 25000, teamHold: 25000, getSigma: 7500 },
             { selfHold: 50000, directHold: 50000, teamHold: 50000, getSigma: 15000 }
-        ],
-        associateProgram: [
-            { userHold: 100, associateGet: 10 },
-            { userHold: 500, associateGet: 50 },
-            { userHold: 1000, associateGet: 100 },
-            { userHold: 2000, associateGet: 200 },
-            { userHold: 5000, associateGet: 500 },
-            { userHold: 10000, associateGet: 1000 }
         ],
         scbProjection: [
             { targetPriceINR: 50 },
@@ -115,19 +99,20 @@ document.addEventListener('DOMContentLoaded', function() {
         // Initialize income tables
         initializeIncomeTables();
         
+        // Initialize SCB monthly INR value
+        updateSCBMonthlyINR();
+        
         // Set last update time
         updateLastUpdateTime();
     }
     
-    // Initialize Income Tables - ALL 8 PLANS
+    // Initialize Income Tables
     function initializeIncomeTables() {
         updateICOBonusTable();
         updateDirectReferralTable();
         updateTeamReferralTable();
         updateAwardRewardTable();
-        updateRoyaltyProgramTable();
         updateMonthlyBonanzaTable();
-        updateAssociateProgramTable();
         updateSCBProjectionTable();
     }
     
@@ -137,10 +122,9 @@ document.addEventListener('DOMContentLoaded', function() {
         updateDirectReferralTable();
         updateTeamReferralTable();
         updateAwardRewardTable();
-        updateRoyaltyProgramTable();
         updateMonthlyBonanzaTable();
-        updateAssociateProgramTable();
         updateSCBProjectionTable();
+        updateSCBMonthlyINR();
     }
     
     // Update ICO Bonus Table
@@ -252,13 +236,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Update Royalty Program Table - TABLE REMOVED
-    function updateRoyaltyProgramTable() {
-        if (!royaltyProgramTable) return;
-        royaltyProgramTable.innerHTML = '';
-        // Table data completely removed - no rows will be created
-    }
-    
     // Update Monthly Bonanza Table - ONLY FIRST ROW
     function updateMonthlyBonanzaTable() {
         if (!monthlyBonanzaTable) return;
@@ -297,32 +274,7 @@ document.addEventListener('DOMContentLoaded', function() {
         monthlyBonanzaTable.appendChild(row);
     }
     
-    // Update Associate Program Table - NEW 7TH INCOME PLAN
-    function updateAssociateProgramTable() {
-        if (!associateProgramTable) return;
-        associateProgramTable.innerHTML = '';
-        
-        incomePlans.associateProgram.forEach(plan => {
-            const userHoldValueUSD = plan.userHold * currentPrice;
-            const userHoldValueINR = userHoldValueUSD * USD_TO_INR_RATE;
-            
-            const associateGetValueUSD = plan.associateGet * currentPrice;
-            const associateGetValueINR = associateGetValueUSD * USD_TO_INR_RATE;
-            
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${plan.userHold.toLocaleString()} SIG6</td>
-                <td class="value-usd">${formatPrice(userHoldValueUSD)}</td>
-                <td class="value-inr">${formatINRPrice(userHoldValueINR)}</td>
-                <td>${plan.associateGet.toLocaleString()} SIG6</td>
-                <td class="value-usd">${formatPrice(associateGetValueUSD)}</td>
-                <td class="value-inr">${formatINRPrice(associateGetValueINR)}</td>
-            `;
-            associateProgramTable.appendChild(row);
-        });
-    }
-    
-    // Update SCB Projection Table - NEW 8TH INCOME PLAN
+    // Update SCB Projection Table
     function updateSCBProjectionTable() {
         if (!scbProjectionTable) return;
         scbProjectionTable.innerHTML = '';
@@ -349,6 +301,17 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             scbProjectionTable.appendChild(row);
         });
+    }
+    
+    // Update SCB Monthly INR Value
+    function updateSCBMonthlyINR() {
+        const monthlySigma = 100;
+        const monthlyValueUSD = monthlySigma * currentPrice;
+        const monthlyValueINR = monthlyValueUSD * USD_TO_INR_RATE;
+        
+        if (scbMonthlyINRElement) {
+            scbMonthlyINRElement.textContent = `₹${monthlyValueINR.toLocaleString('en-IN', {maximumFractionDigits: 0})}`;
+        }
     }
     
     // Extract initial price from HTML
@@ -531,7 +494,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (price < 100) {
             return `₹${price.toFixed(2)}`;
         } else {
-            return `₹${price.toFixed(2)}`;
+            return `₹${price.toLocaleString('en-IN', {maximumFractionDigits: 0})}`;
         }
     }
     
