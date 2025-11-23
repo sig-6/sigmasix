@@ -508,3 +508,335 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+// Success Story Animation Initialization
+function initSuccessStoryAnimations() {
+    // Growth bar animation
+    const growthFill = document.querySelector('.growth-fill');
+    if (growthFill) {
+        // Reset and animate growth bar
+        growthFill.style.width = '0%';
+        setTimeout(() => {
+            growthFill.style.width = '403.33%';
+        }, 500);
+    }
+    
+    // Particle animation
+    createFloatingParticles();
+}
+
+function createFloatingParticles() {
+    const particlesContainer = document.querySelector('.success-particles');
+    if (!particlesContainer) return;
+    
+    // Clear existing particles
+    particlesContainer.innerHTML = '';
+    
+    // Create more particles
+    for (let i = 0; i < 12; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.animationDelay = `${Math.random() * 6}s`;
+        particlesContainer.appendChild(particle);
+    }
+}
+
+// DOM Content Loaded mein add karo
+document.addEventListener('DOMContentLoaded', function() {
+    // ... existing code ...
+    
+    // Initialize success story animations
+    setTimeout(initSuccessStoryAnimations, 1000);
+});
+
+// Advanced Live Animation Functions
+function initLiveAnimations() {
+    initCryptoCanvas();
+    initPriceChart();
+    initLiveCounting();
+    initTransactionFeed();
+    initTimelineAnimation();
+    init3DOrb();
+}
+
+function initCryptoCanvas() {
+    const canvas = document.getElementById('cryptoCanvas');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    
+    const particles = [];
+    const particleCount = 50;
+    
+    // Create particles
+    for (let i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2 + 1,
+            speedX: (Math.random() - 0.5) * 0.5,
+            speedY: (Math.random() - 0.5) * 0.5,
+            color: Math.random() > 0.5 ? 'rgba(0, 229, 255, 0.8)' : 'rgba(108, 66, 245, 0.8)'
+        });
+    }
+    
+    function animate() {
+        ctx.fillStyle = 'rgba(10, 11, 29, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        particles.forEach(particle => {
+            particle.x += particle.speedX;
+            particle.y += particle.speedY;
+            
+            // Wrap around edges
+            if (particle.x < 0) particle.x = canvas.width;
+            if (particle.x > canvas.width) particle.x = 0;
+            if (particle.y < 0) particle.y = canvas.height;
+            if (particle.y > canvas.height) particle.y = 0;
+            
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            ctx.fillStyle = particle.color;
+            ctx.fill();
+            
+            // Draw connections
+            particles.forEach(otherParticle => {
+                const dx = particle.x - otherParticle.x;
+                const dy = particle.y - otherParticle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 100) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(0, 229, 255, ${0.2 * (1 - distance/100)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.moveTo(particle.x, particle.y);
+                    ctx.lineTo(otherParticle.x, otherParticle.y);
+                    ctx.stroke();
+                }
+            });
+        });
+        
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    // Handle resize
+    window.addEventListener('resize', () => {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+    });
+}
+
+function initPriceChart() {
+    const canvas = document.getElementById('priceChart');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    
+    const data = [3.10, 4.50, 6.80, 8.20, 12.50, 15.60];
+    const padding = 20;
+    const width = canvas.width - padding * 2;
+    const height = canvas.height - padding * 2;
+    
+    function drawChart() {
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw area
+        ctx.beginPath();
+        ctx.moveTo(padding, canvas.height - padding);
+        
+        data.forEach((value, index) => {
+            const x = padding + (index / (data.length - 1)) * width;
+            const y = canvas.height - padding - ((value - 3) / (16 - 3)) * height;
+            
+            if (index === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
+        });
+        
+        ctx.lineTo(canvas.width - padding, canvas.height - padding);
+        ctx.closePath();
+        
+        const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        gradient.addColorStop(0, 'rgba(0, 255, 157, 0.3)');
+        gradient.addColorStop(1, 'rgba(0, 255, 157, 0.1)');
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        
+        // Draw line
+        ctx.beginPath();
+        data.forEach((value, index) => {
+            const x = padding + (index / (data.length - 1)) * width;
+            const y = canvas.height - padding - ((value - 3) / (16 - 3)) * height;
+            
+            if (index === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
+        });
+        
+        ctx.strokeStyle = '#00ff9d';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Draw points
+        data.forEach((value, index) => {
+            const x = padding + (index / (data.length - 1)) * width;
+            const y = canvas.height - padding - ((value - 3) / (16 - 3)) * height;
+            
+            ctx.beginPath();
+            ctx.arc(x, y, 3, 0, Math.PI * 2);
+            ctx.fillStyle = '#00ff9d';
+            ctx.fill();
+            ctx.strokeStyle = '#0a0b1d';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        });
+    }
+    
+    drawChart();
+}
+
+function initLiveCounting() {
+    const counters = document.querySelectorAll('.live-count');
+    
+    counters.forEach(counter => {
+        const target = parseFloat(counter.getAttribute('data-target'));
+        const duration = 2000; // 2 seconds
+        const step = target / (duration / 16); // 60fps
+        let current = 0;
+        
+        const updateCounter = () => {
+            current += step;
+            if (current < target) {
+                if (counter.textContent.includes('₹')) {
+                    counter.textContent = `₹${Math.floor(current).toLocaleString()}`;
+                } else if (counter.textContent.includes('%')) {
+                    counter.textContent = `${current.toFixed(2)}%`;
+                }
+                requestAnimationFrame(updateCounter);
+            } else {
+                if (counter.textContent.includes('₹')) {
+                    counter.textContent = `₹${target.toLocaleString()}`;
+                } else if (counter.textContent.includes('%')) {
+                    counter.textContent = `${target.toFixed(2)}%`;
+                }
+            }
+        };
+        
+        // Start counter when element is in viewport
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    updateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+        
+        observer.observe(counter);
+    });
+}
+
+function initTransactionFeed() {
+    const feed = document.querySelector('.transaction-feed');
+    if (!feed) return;
+    
+    const transactions = [
+        "Sigma Purchase: 500 SIG6 @ ₹3.10",
+        "Sigma Transfer: 200 SIG6 → Wallet",
+        "Sigma Bonus: 50 SIG6 Added",
+        "Sigma Purchase: 300 SIG6 @ ₹4.50",
+        "Network Reward: 25 SIG6 Received",
+        "Sigma Transfer: 150 SIG6 → Staking",
+        "Sigma Purchase: 400 SIG6 @ ₹6.80",
+        "Team Bonus: 75 SIG6 Added",
+        "Sigma Transfer: 100 SIG6 → Wallet",
+        "Sigma Purchase: 289 SIG6 @ ₹8.20"
+    ];
+    
+    let index = 0;
+    
+    function addTransaction() {
+        const transaction = document.createElement('div');
+        transaction.className = 'transaction-item';
+        transaction.style.cssText = `
+            padding: 8px 12px;
+            background: rgba(108, 66, 245, 0.1);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+            color: var(--text);
+            border-left: 3px solid var(--secondary);
+            animation: slideIn 0.5s ease-out;
+        `;
+        
+        transaction.textContent = transactions[index];
+        feed.insertBefore(transaction, feed.firstChild);
+        
+        // Remove old transactions
+        if (feed.children.length > 4) {
+            feed.removeChild(feed.lastChild);
+        }
+        
+        index = (index + 1) % transactions.length;
+    }
+    
+    // Add first transaction immediately
+    addTransaction();
+    
+    // Add new transaction every 3 seconds
+    setInterval(addTransaction, 3000);
+}
+
+function initTimelineAnimation() {
+    const timelinePoints = document.querySelectorAll('.timeline-point');
+    
+    timelinePoints.forEach((point, index) => {
+        setTimeout(() => {
+            point.style.opacity = '1';
+            point.style.transform = 'translateY(0)';
+        }, index * 500);
+    });
+}
+
+function init3DOrb() {
+    const orb = document.querySelector('.crypto-orb-3d');
+    if (!orb) return;
+    
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth) - 0.5;
+        mouseY = (e.clientY / window.innerHeight) - 0.5;
+    });
+    
+    function updateOrb() {
+        if (orb) {
+            orb.style.transform = `translateY(-50%) rotateY(${mouseX * 30}deg) rotateX(${mouseY * -30}deg)`;
+        }
+        requestAnimationFrame(updateOrb);
+    }
+    
+    updateOrb();
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // ... existing code ...
+    
+    // Initialize live animations with delay
+    setTimeout(initLiveAnimations, 1000);
+});
+// ***************************************************************************************
